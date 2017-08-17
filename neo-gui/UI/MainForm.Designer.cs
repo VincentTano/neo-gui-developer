@@ -58,6 +58,7 @@
             this.选举EToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.smartContractWatchlistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助HToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.查看帮助VToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.官网WToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -123,7 +124,7 @@
             this.contextMenuStrip4 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CopySHtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyMessagetoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.smartContractWatchlistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -326,6 +327,12 @@
             resources.ApplyResources(this.optionsToolStripMenuItem, "optionsToolStripMenuItem");
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
+            // 
+            // smartContractWatchlistToolStripMenuItem
+            // 
+            resources.ApplyResources(this.smartContractWatchlistToolStripMenuItem, "smartContractWatchlistToolStripMenuItem");
+            this.smartContractWatchlistToolStripMenuItem.Name = "smartContractWatchlistToolStripMenuItem";
+            this.smartContractWatchlistToolStripMenuItem.Click += new System.EventHandler(this.smartContractWatchlistToolStripMenuItem_Click);
             // 
             // 帮助HToolStripMenuItem
             // 
@@ -781,16 +788,20 @@
             resources.ApplyResources(this.CopyMessagetoolStripMenuItem, "CopyMessagetoolStripMenuItem");
             this.CopyMessagetoolStripMenuItem.Click += new System.EventHandler(this.CopyMessagetoolStripMenuItem_Click);
             // 
-            // smartContractWatchlistToolStripMenuItem
+            // checkBox1
             // 
-            resources.ApplyResources(this.smartContractWatchlistToolStripMenuItem, "smartContractWatchlistToolStripMenuItem");
-            this.smartContractWatchlistToolStripMenuItem.Name = "smartContractWatchlistToolStripMenuItem";
-            this.smartContractWatchlistToolStripMenuItem.Click += new System.EventHandler(this.smartContractWatchlistToolStripMenuItem_Click);
+            resources.ApplyResources(this.checkBox1, "checkBox1");
+            this.checkBox1.BackColor = System.Drawing.Color.Blue;
+            this.checkBox1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = false;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -912,6 +923,6 @@
         private System.Windows.Forms.ToolStripMenuItem CopySHtoolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CopyMessagetoolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem smartContractWatchlistToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
-

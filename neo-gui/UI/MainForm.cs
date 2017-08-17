@@ -349,8 +349,8 @@ namespace Neo.UI
                     }
                     else
                     {
-                        string asset_name = asset.Asset.AssetType == AssetType.SystemShare ? "NEO" :
-                                            asset.Asset.AssetType == AssetType.SystemCoin ? "NeoGas" :
+                        string asset_name = asset.Asset.AssetType == AssetType.GoverningToken ? "NEO" :
+                                            asset.Asset.AssetType == AssetType.UtilityToken ? "NeoGas" :
                                             asset.Asset.GetName();
                         listView2.Items.Add(new ListViewItem(new[]
                         {
@@ -390,7 +390,7 @@ namespace Neo.UI
                 ListViewItem.ListViewSubItem subitem = item.SubItems["issuer"];
                 AssetState asset = (AssetState)item.Tag;
                 CertificateQueryResult result;
-                if (asset.AssetType == AssetType.SystemShare || asset.AssetType == AssetType.SystemCoin)
+                if (asset.AssetType == AssetType.GoverningToken || asset.AssetType == AssetType.UtilityToken)
                 {
                     result = new CertificateQueryResult { Type = CertificateQueryResultType.System };
                 }
@@ -872,7 +872,7 @@ namespace Neo.UI
             删除DToolStripMenuItem1.Enabled = listView2.SelectedIndices.Count > 0;
             if (删除DToolStripMenuItem1.Enabled)
             {
-                删除DToolStripMenuItem1.Enabled = listView2.SelectedItems.OfType<ListViewItem>().Select(p => (AssetState)p.Tag).All(p => p.AssetType != AssetType.SystemShare && p.AssetType != AssetType.SystemCoin);
+                删除DToolStripMenuItem1.Enabled = listView2.SelectedItems.OfType<ListViewItem>().Select(p => (AssetState)p.Tag).All(p => p.AssetType != AssetType.GoverningToken && p.AssetType != AssetType.UtilityToken);
             }
         }
 
@@ -981,5 +981,166 @@ namespace Neo.UI
         {
             scListLoad();
         }
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                ForeColor = Color.LimeGreen;
+                BackColor = Color.Black;
+                listView1.BackColor = Color.Black;
+                listView1.ForeColor = Color.LimeGreen;
+                listView1.BorderStyle = BorderStyle.None;
+                tabPage1.BackColor = Color.Black;
+                tabPage1.BorderStyle = BorderStyle.None;
+                tabPage2.BackColor = Color.Black;
+                tabPage2.BorderStyle = BorderStyle.None;
+                tabPage3.BackColor = Color.Black;
+                tabPage3.BorderStyle = BorderStyle.None;
+                tabPage4.BackColor = Color.Black;
+                tabPage4.BorderStyle = BorderStyle.None;
+                listView2.BackColor = Color.Black;
+                listView2.ForeColor = Color.LimeGreen;
+                listView2.BorderStyle = BorderStyle.None;
+                listView3.BackColor = Color.Black;
+                listView3.ForeColor = Color.LimeGreen;
+                listView3.BorderStyle = BorderStyle.None;
+                listView4.BackColor = Color.Black;
+                listView4.ForeColor = Color.LimeGreen;
+                listView4.BorderStyle = BorderStyle.None;
+                FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+                checkBox1.BackColor = System.Drawing.Color.Red;
+                menuStrip1.BackColor = Color.Black;
+                menuStrip1.ForeColor = Color.LimeGreen;
+                statusStrip1.ForeColor = Color.LimeGreen;
+                statusStrip1.BackColor = Color.Black;
+                contextMenuStrip1.ForeColor = Color.LimeGreen;
+                contextMenuStrip1.BackColor = Color.Black;
+                contextMenuStrip2.ForeColor = Color.LimeGreen;
+                contextMenuStrip2.BackColor = Color.Black;
+                contextMenuStrip3.ForeColor = Color.LimeGreen;
+                contextMenuStrip3.BackColor = Color.Black;
+                contextMenuStrip4.ForeColor = Color.LimeGreen;
+                contextMenuStrip4.BackColor = Color.Black;
+                menuStrip1.ForeColor = Color.LimeGreen;
+                menuStrip1.BackColor = Color.Black;
+                钱包WToolStripMenuItem.ForeColor = Color.LimeGreen;
+                钱包WToolStripMenuItem.BackColor = Color.Black;
+                创建钱包数据库NToolStripMenuItem.ForeColor = Color.LimeGreen;
+                创建钱包数据库NToolStripMenuItem.BackColor = Color.Black;
+                打开钱包数据库OToolStripMenuItem.ForeColor = Color.LimeGreen;
+                打开钱包数据库OToolStripMenuItem.BackColor = Color.Black;
+                修改密码CToolStripMenuItem.ForeColor = Color.LimeGreen;
+                修改密码CToolStripMenuItem.BackColor = Color.Black;
+                重建钱包数据库RToolStripMenuItem.ForeColor = Color.LimeGreen;
+                重建钱包数据库RToolStripMenuItem.BackColor = Color.Black;
+                restoreAccountsToolStripMenuItem.ForeColor = Color.LimeGreen;
+                restoreAccountsToolStripMenuItem.BackColor = Color.Black;
+                退出XToolStripMenuItem.ForeColor = Color.LimeGreen;
+                退出XToolStripMenuItem.BackColor = Color.Black;
+                交易TToolStripMenuItem.ForeColor = Color.LimeGreen;
+                交易TToolStripMenuItem.BackColor = Color.Black;
+                转账TToolStripMenuItem.ForeColor = Color.LimeGreen;
+                转账TToolStripMenuItem.BackColor = Color.Black;
+                交易TToolStripMenuItem1.ForeColor = Color.LimeGreen;
+                交易TToolStripMenuItem1.BackColor = Color.Black;
+                签名SToolStripMenuItem.ForeColor = Color.LimeGreen;
+                签名SToolStripMenuItem.BackColor = Color.Black;
+                高级AToolStripMenuItem.ForeColor = Color.LimeGreen;
+                高级AToolStripMenuItem.BackColor = Color.Black;
+                提取小蚁币CToolStripMenuItem.ForeColor = Color.LimeGreen;
+                提取小蚁币CToolStripMenuItem.BackColor = Color.Black;
+                requestCertificateToolStripMenuItem.ForeColor = Color.LimeGreen;
+                requestCertificateToolStripMenuItem.BackColor = Color.Black;
+                注册资产RToolStripMenuItem.ForeColor = Color.LimeGreen;
+                注册资产RToolStripMenuItem.BackColor = Color.Black;
+                资产分发IToolStripMenuItem.ForeColor = Color.LimeGreen;
+                资产分发IToolStripMenuItem.BackColor = Color.Black;
+                deployContractToolStripMenuItem.ForeColor = Color.LimeGreen;
+                deployContractToolStripMenuItem.BackColor = Color.Black;
+                invokeContractToolStripMenuItem.ForeColor = Color.LimeGreen;
+                invokeContractToolStripMenuItem.BackColor = Color.Black;
+                选举EToolStripMenuItem.ForeColor = Color.LimeGreen;
+                选举EToolStripMenuItem.BackColor = Color.Black;
+                optionsToolStripMenuItem.ForeColor = Color.LimeGreen;
+                optionsToolStripMenuItem.BackColor = Color.Black;
+                smartContractWatchlistToolStripMenuItem.ForeColor = Color.LimeGreen;
+                smartContractWatchlistToolStripMenuItem.BackColor = Color.Black;
+                帮助HToolStripMenuItem.ForeColor = Color.LimeGreen;
+                帮助HToolStripMenuItem.BackColor = Color.Black;
+                查看帮助VToolStripMenuItem.ForeColor = Color.LimeGreen;
+                查看帮助VToolStripMenuItem.BackColor = Color.Black;
+                官网WToolStripMenuItem.ForeColor = Color.LimeGreen;
+                官网WToolStripMenuItem.BackColor = Color.Black;
+                开发人员工具TToolStripMenuItem.ForeColor = Color.LimeGreen;
+                开发人员工具TToolStripMenuItem.BackColor = Color.Black;
+                关于AntSharesToolStripMenuItem.ForeColor = Color.LimeGreen;
+                关于AntSharesToolStripMenuItem.BackColor = Color.Black;
+                toolStripProgressBar1.Style = ProgressBarStyle.Blocks;
+                return;
+            }
+            ForeColor = DefaultForeColor;
+            BackColor = DefaultBackColor;
+            listView1.BackColor = DefaultBackColor;
+            listView1.ForeColor = DefaultForeColor;
+            listView2.BackColor = DefaultBackColor;
+            listView2.ForeColor = DefaultForeColor;
+            listView3.BackColor = DefaultBackColor;
+            listView3.ForeColor = DefaultForeColor;
+            listView4.BackColor = DefaultBackColor;
+            listView4.ForeColor = DefaultForeColor;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            checkBox1.BackColor = System.Drawing.Color.Blue;
+            menuStrip1.ForeColor = DefaultForeColor;
+            menuStrip1.BackColor = DefaultBackColor;
+            statusStrip1.ForeColor = DefaultForeColor;
+            statusStrip1.BackColor = DefaultBackColor;
+        }
+
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            base.OnMouseDown(e);
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Capture = false;
+                Message msg = Message.Create(this.Handle, 0XA1, new IntPtr(2), IntPtr.Zero);
+                this.WndProc(ref msg);
+            }
+        }
+
+        private void tabControl1_DrawItem(object sender, System.Windows.Forms.DrawItemEventArgs e)
+        {
+            //TabPage CurrentTab = tabControl1.TabPages[e.Index];
+            //Rectangle ItemRect = tabControl1.GetTabRect(e.Index);
+            SolidBrush FillBrush = new SolidBrush(Color.Black);
+            //SolidBrush TextBrush = new SolidBrush(Color.LimeGreen);
+            //StringFormat sf = new StringFormat();
+            //sf.Alignment = StringAlignment.Center;
+            //sf.LineAlignment = StringAlignment.Center;
+
+            //draw rectangle behind the tabs
+            Rectangle background = new Rectangle();
+            background.Location = new Point(0, 0);
+
+            //pad the rectangle to cover the 1 pixel line between the top of the tabpage and the start of the tabs
+            background.Size = new Size(this.Width, this.Height);
+            e.Graphics.FillRectangle(FillBrush, background);
+
+            //If we are currently painting the Selected TabItem we'll
+            //change the brush colors and inflate the rectangle.
+
+            //Next we'll paint the TabItem with our Fill Brush
+            //e.Graphics.FillRectangle(FillBrush, ItemRect);
+
+            //Now draw the text.
+            //e.Graphics.DrawString(CurrentTab.Text, e.Font, TextBrush, (RectangleF)ItemRect, sf);
+
+            //Reset any Graphics rotation
+            e.Graphics.ResetTransform();
+
+            //Finally, we should Dispose of our brushes.
+            FillBrush.Dispose();
+            //TextBrush.Dispose();
+        }
+
     }
 }
