@@ -640,7 +640,8 @@ namespace Neo.UI
             using (InvokeContractDialog dialog = new InvokeContractDialog())
             {
                 if (dialog.ShowDialog(this) != DialogResult.OK) return;
-                Helper.SignAndShowInformation(dialog.GetTransaction());
+                InvocationTransaction tx = dialog.GetTransaction();
+                Helper.SignAndShowInformation(tx);
             }
         }
 
@@ -1001,12 +1002,15 @@ namespace Neo.UI
                 listView2.BackColor = Color.Black;
                 listView2.ForeColor = Color.LimeGreen;
                 listView2.BorderStyle = BorderStyle.None;
+                listView2.GridLines = false;
                 listView3.BackColor = Color.Black;
                 listView3.ForeColor = Color.LimeGreen;
                 listView3.BorderStyle = BorderStyle.None;
+                listView3.GridLines = false;
                 listView4.BackColor = Color.Black;
                 listView4.ForeColor = Color.LimeGreen;
                 listView4.BorderStyle = BorderStyle.None;
+                listView4.GridLines = false;
                 FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
                 checkBox1.BackColor = System.Drawing.Color.Red;
                 menuStrip1.BackColor = Color.Black;
