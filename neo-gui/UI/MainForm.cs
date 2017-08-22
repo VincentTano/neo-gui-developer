@@ -34,6 +34,7 @@ namespace Neo.UI
         {
             InitializeComponent();
             StateReader.Log += StateReader_Log;
+            StateReader.Notify += StateReader_Notify;
 
             if (xdoc != null)
             {
@@ -472,6 +473,51 @@ namespace Neo.UI
                     {
                         Name = "Message",
                         Text = e.Message
+                    }
+                }, -1));
+            //throw new NotImplementedException();
+        }
+
+        private void StateReader_Notify(object sender, NotifyEventArgs e)
+        {
+            ContractState contract = Blockchain.Default.GetContract(e.ScriptHash);
+            if (contract == null) return;
+            StackItem[] notifyParams = e.State.GetArray();
+            string notifyString = System.Text.Encoding.UTF8.GetString(notifyParams[0].GetByteArray());
+            for(int i = 1; i < notifyParams.Length; i++)
+            {
+                notifyString += notifyParams[i].GetByteArray().ToHexString() + ", ";
+            }
+            notifyString = notifyString.Remove(notifyString.Length - 2);
+            //MessageBox.Show();
+
+            DateTime localDateTime = DateTime.Now;
+            listView4.Items.Add(new ListViewItem(new[]
+                {
+                    new ListViewItem.ListViewSubItem
+                    {
+                        Name = "Time",
+                        Text = localDateTime.ToString()
+                    },
+                    new ListViewItem.ListViewSubItem
+                    {
+                        Name = "Block",
+                        Text = Blockchain.Default.Height.ToString()
+                    },
+                    new ListViewItem.ListViewSubItem
+                    {
+                        Name = "Script Hash",
+                        Text = e.ScriptHash.ToString()
+                    },
+                    new ListViewItem.ListViewSubItem
+                    {
+                        Name = "Name",
+                        Text = contract.Name.ToString()
+                    },
+                    new ListViewItem.ListViewSubItem
+                    {
+                        Name = "Message",
+                        Text = notifyString
                     }
                 }, -1));
             //throw new NotImplementedException();
