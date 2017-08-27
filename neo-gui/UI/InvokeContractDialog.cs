@@ -1,7 +1,5 @@
-﻿using Neo.Core;
+using Neo.Core;
 using Neo.Cryptography.ECC;
-using Neo.Implementations.Blockchains.LevelDB;
-using Neo.IO.Caching;
 using Neo.Properties;
 using Neo.SmartContract;
 using Neo.VM;
@@ -64,13 +62,13 @@ namespace Neo.UI
                             sb.EmitPush((BigInteger)parameter.Value);
                             break;
                         case ContractParameterType.Hash160:
-                            sb.EmitPush(((UInt160)parameter.Value).ToArray());
+                            sb.EmitPush((UInt160)parameter.Value);
                             break;
                         case ContractParameterType.Hash256:
-                            sb.EmitPush(((UInt256)parameter.Value).ToArray());
+                            sb.EmitPush((UInt256)parameter.Value);
                             break;
                         case ContractParameterType.PublicKey:
-                            sb.EmitPush(((ECPoint)parameter.Value).EncodePoint(true));
+                            sb.EmitPush((ECPoint)parameter.Value);
                             break;
                         case ContractParameterType.Array:
                             foreach(var item in ((object[])parameter.Value).Reverse())
@@ -142,24 +140,9 @@ namespace Neo.UI
             if (tx.Inputs == null) tx.Inputs = new CoinReference[0];
             if (tx.Outputs == null) tx.Outputs = new TransactionOutput[0];
             if (tx.Scripts == null) tx.Scripts = new Witness[0];
-            LevelDBBlockchain blockchain = (LevelDBBlockchain)Blockchain.Default;
-            DataCache<UInt160, AccountState> accounts = blockchain.GetTable<UInt160, AccountState>();
-            DataCache<ECPoint, ValidatorState> validators = blockchain.GetTable<ECPoint, ValidatorState>();
-            DataCache<UInt256, AssetState> assets = blockchain.GetTable<UInt256, AssetState>();
-            DataCache<UInt160, ContractState> contracts = blockchain.GetTable<UInt160, ContractState>();
-            DataCache<StorageKey, StorageItem> storages = blockchain.GetTable<StorageKey, StorageItem>();
-            CachedScriptTable script_table = new CachedScriptTable(contracts);
-            StateMachine service = new StateMachine(accounts, validators, assets, contracts, storages);
-
-            ////////////////////////////////////////////////////////////
-            ////////////////////////EXPERIMENTAL////////////////////////
-            testTx = tx;
-            testTx.Gas = Fixed8.Satoshi;
-            testTx = GetTransaction();
-            ////////////////////////EXPERIMENTAL////////////////////////            
-            ////////////////////////////////////////////////////////////
-
-            ApplicationEngine engine = new ApplicationEngine(TriggerType.Application, testTx, script_table, service, Fixed8.Zero, true);
+            tx.Gas = Fixed8.Satoshi;
+            tx = GetTransaction();
+            ApplicationEngine engine = TestEngine.Run(tx.Script, tx);
             engine.LoadScript(testTx.Script, false);
             
             if (engine.Execute())
